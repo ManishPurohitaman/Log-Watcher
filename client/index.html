@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Client</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Socket.IO Client</h1>
+    <div id="status">Sample Log File</div>
+    <div id="content"></div>
+
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io();
+
+        // On successful connection
+        socket.on('connect', () => {
+            document.getElementById('status').innerText = 'Connected to WebSocket Server!';
+            console.log('Connected to Socket.IO server');
+        });
+
+        socket.on('fileEvent', (message) => {
+            console.log(message);
+            document.getElementById('content').innerText += `${message}`;
+            console.log('Message from server:', message);
+        });
+
+    </script>
+</body>
+</html>
